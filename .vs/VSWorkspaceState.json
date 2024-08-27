@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\(platform)",
+    "\\app\\(platform)\\(dashboard)",
+    "\\app\\(platform)\\(dashboard)\\organization",
+    "\\app\\(platform)\\(dashboard)\\_components"
+  ],
+  "SelectedNode": "\\app\\(platform)\\(dashboard)\\_components\\sidebar.tsx",
+  "PreviewInSolutionExplorer": false
+}
