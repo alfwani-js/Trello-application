@@ -3,8 +3,9 @@ import { ElementRef, useRef, useState } from "react"
 import { Board } from "@prisma/client"
 import { Button } from "@/components/ui/button"
 import { FormInput } from "@/components/form/form-input"
-
-
+import { toast } from "sonner"
+import { updateBoard } from "@/actions/update-board"
+import { useAction } from "@/hooks/use-action";
 
 
 interface BoardTitleFormProps{
@@ -13,9 +14,23 @@ interface BoardTitleFormProps{
 export const BoardTitleForm = ({
     data,
 }: BoardTitleFormProps) =>{
+    const { execute } = useAction(updateBoard, {
+        onSuccess: (data) => {
+            toast.success(` Board "${data.title}" updated!`);
+            SetTitle(data.title);
+            disableEditing();
+
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    })
+
     const formRef = useRef<ElementRef<"form">>(null);
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef<ElementRef<"input">>(null);
+
+    const [title, SetTitle] = useState(data.title);
 
     const enableEditing = () =>{
         //TODO: Focus on inputs
@@ -31,7 +46,11 @@ export const BoardTitleForm = ({
     };
     const onSubmit = (formData: FormData) =>{
         const title = formData.get("title") as string;
-       console.log("I am submitted", title); 
+        
+        execute({
+            title,
+            id: data.id,
+        });
 
     }
     const onBlur = () => {
@@ -44,7 +63,7 @@ export const BoardTitleForm = ({
                  ref={inputRef}
                  id="title"
                  onBlur={onBlur}
-                 defaultValue = {data.title}
+                 defaultValue = {title}
                  className="text-lg font-bold px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent boarder-none"
                 />
 
@@ -57,7 +76,7 @@ export const BoardTitleForm = ({
         variant="transparent"
           className="font-bold text-lg h-auto w-auto p-1 px-2"
         >
-            {data.title}
+            {title}
         </Button>
     );
 
