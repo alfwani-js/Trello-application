@@ -1,5 +1,7 @@
 "use client"
 
+import { forwardRef } from "react";
+
 interface CardFormProps {
     listId: string;
     enableEditing: ()=> void;
@@ -7,16 +9,18 @@ interface CardFormProps {
     isEditing: boolean;
 }
 
-export const CardForm = ({
+export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({
     listId,
     enableEditing,
     disableEditing,
     isEditing
 
-}:CardFormProps) => {
+}, ref) => {
     return (
         <div>
             Card Form
         </div>
     )
-}
+});
+
+CardForm.displayName ="CardForm"
