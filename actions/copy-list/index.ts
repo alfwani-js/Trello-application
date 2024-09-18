@@ -25,7 +25,7 @@ const handler = async (data: InputType): Promise<ReturnType> =>{
                 },
             },
             include:{
-                Cards: true,
+                cards: true,
             }
 
         })
@@ -44,9 +44,9 @@ const handler = async (data: InputType): Promise<ReturnType> =>{
                 boardId: listToCopy.boardId,
                 title: `${listToCopy.title} - Copy`,
                 order: newOrder,
-                Cards:{
+                cards:{
                     createMany: {
-                        data: listToCopy.Cards.map((card) => ({
+                        data: listToCopy.cards.map((card) => ({
                             title: card.title,
                             description: card.description,
                             order: card.order,
@@ -55,7 +55,7 @@ const handler = async (data: InputType): Promise<ReturnType> =>{
                 },
             },
             include: {
-                Cards: true,
+                cards: true,
             },
         });
 
