@@ -134,6 +134,10 @@ export const ListContainer = ({
 
             setOrderedData(newOrderedData)
             //to trigger server action
+            executeUpdateCardOrder({
+              boardId: boardId,
+              items: destList.cards,
+            });
           }
 
         }
