@@ -22,6 +22,7 @@ export const CardModal = () =>{
         >
             <DialogContent>
                 {cardData?.title}
+                coming soon! 
             </DialogContent>
         </Dialog>
     );
